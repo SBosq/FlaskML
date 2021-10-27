@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder='templates')
 @app.route("/", methods=['POST', 'GET'])
 def home():
     if request.method == 'POST':
-        loaded_treez = joblib.load('ML/visasDT.pkl')
+        loaded_treez = joblib.load('/home/SBosq/mysite/ML/visasDT.pkl')
         fields = []
         jobTitle = request.form['jobTitle']
         ftPosition = request.form['ftPosition']
@@ -31,7 +31,7 @@ def home():
         df = pd.DataFrame(fields)
         df.columns = ['JOB_TITLE', 'FULL_TIME_POSITION', 'EMPLOYER_NAME', 'EMPLOYER_STATE', 'WORKSITE_CITY_1',
                       'PREVAILING_WAGE_1', 'YEAR']
-        dataTrain = pd.read_csv('ML/unified_Visas.csv')
+        dataTrain = pd.read_csv('/home/SBosq/mysite/ML/unified_Visas.csv')
         df1 = pd.DataFrame(dataTrain)
         del df1['CASE_STATUS']
         df1 = df1.append(df, ignore_index=True)
@@ -56,10 +56,7 @@ def home():
 def api_visa_request():
     if request.method == 'POST':
         field = []
-        loaded_treez = joblib.load('ML/visasDT.pkl')
-        # print(request.is_json)
-        content = request.get_json()
-        # print(content)
+        loaded_treez = joblib.load('/home/SBosq/mysite/ML/visasDT.pkl')
         jobTitle = request.json[0]
         print(jobTitle)
         ftPosition = request.json[1]
@@ -80,7 +77,7 @@ def api_visa_request():
         df = pd.DataFrame(field)
         df.columns = ['JOB_TITLE', 'FULL_TIME_POSITION', 'EMPLOYER_NAME', 'EMPLOYER_STATE', 'WORKSITE_CITY_1',
                       'PREVAILING_WAGE_1', 'YEAR']
-        dataTrain = pd.read_csv('ML/unified_Visas.csv')
+        dataTrain = pd.read_csv('/home/SBosq/mysite/ML/unified_Visas.csv')
         df1 = pd.DataFrame(dataTrain)
         del df1['CASE_STATUS']
         df1 = df1.append(df, ignore_index=True)
@@ -99,10 +96,7 @@ def api_visa_request():
         return results
     else:
         field = []
-        loaded_treez = joblib.load('ML/visasDT.pkl')
-        # print(request.is_json)
-        content = request.get_json()
-        # print(content)
+        loaded_treez = joblib.load('/home/SBosq/mysite/ML/visasDT.pkl')
         jobTitle = request.json[0]
         print(jobTitle)
         ftPosition = request.json[1]
@@ -123,7 +117,7 @@ def api_visa_request():
         df = pd.DataFrame(field)
         df.columns = ['JOB_TITLE', 'FULL_TIME_POSITION', 'EMPLOYER_NAME', 'EMPLOYER_STATE', 'WORKSITE_CITY_1',
                       'PREVAILING_WAGE_1', 'YEAR']
-        dataTrain = pd.read_csv('ML/unified_Visas.csv')
+        dataTrain = pd.read_csv('/home/SBosq/mysite/ML/unified_Visas.csv')
         df1 = pd.DataFrame(dataTrain)
         del df1['CASE_STATUS']
         df1 = df1.append(df, ignore_index=True)
